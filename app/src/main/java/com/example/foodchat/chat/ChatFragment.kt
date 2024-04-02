@@ -11,7 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodchat.R
@@ -30,6 +32,7 @@ class ChatFragment : Fragment() {
     private lateinit var chat: Chat
     private lateinit var generativeModel: GenerativeModel
     private lateinit var chatAdapter: ChatAdapter
+    private lateinit var dotAnim: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +51,7 @@ class ChatFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView = requireView().findViewById<RecyclerView>(R.id.recyclerView)
         val etText = requireView().findViewById<EditText>(R.id.etText)
-        val btSend = requireView().findViewById<Button>(R.id.btSend)
+        val btSend = requireView().findViewById<ImageButton>(R.id.btSend)
 
         generativeModel = GenerativeModel(
             modelName = "gemini-pro",
@@ -77,8 +80,15 @@ class ChatFragment : Fragment() {
         chatAdapter = ChatAdapter()
         recyclerView.adapter = chatAdapter
 
+        val initialMessage = "Hi, how can I help you?"
+        val initialChatMessage = ChatMessage(message = initialMessage, isMessageFromUser = false)
+        chatAdapter.chatMessages.add(initialChatMessage)
+        chatAdapter.notifyDataSetChanged()
+
         btSend.setOnClickListener {
             val message = etText.text.toString().trim()
+
+            showLinearLayout(dotAnim)
 
             val chatMessage =
                 ChatMessage(message = message, isMessageFromUser = true)
@@ -95,9 +105,20 @@ class ChatFragment : Fragment() {
                     )
                 )
                 chatAdapter.notifyDataSetChanged()
+
+                hideLinearLayout(dotAnim)
             }
+
+            etText.text.clear()
         }
 
+        dotAnim = requireView().findViewById<LinearLayout>(R.id.dot_animation)
+        hideLinearLayout(dotAnim)
+
+        animateDots()
+
+    }
+    private fun animateDots(){
         val imageView = requireView().findViewById<ImageView>(R.id.imageView)
         val iv2 = requireView().findViewById<ImageView>(R.id.iv2)
         val iv3 = requireView().findViewById<ImageView>(R.id.iv3)
@@ -126,8 +147,6 @@ class ChatFragment : Fragment() {
             repeatMode = ObjectAnimator.REVERSE
             repeatCount = ObjectAnimator.RESTART
         }
-
-
         anim1.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)
@@ -157,8 +176,13 @@ class ChatFragment : Fragment() {
         })
 
         anim1.start()
-
+    }
+    private fun showLinearLayout(linearLayout: LinearLayout) {
+        linearLayout.visibility = View.VISIBLE
     }
 
+    private fun hideLinearLayout(linearLayout: LinearLayout) {
+        linearLayout.visibility = View.INVISIBLE
+    }
 
 }
