@@ -3,13 +3,15 @@ package com.example.foodchat.chat
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.os.Bundle
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.view.ViewTreeObserver
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -36,19 +38,18 @@ class ChatFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_chat, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val recyclerView = requireView().findViewById<RecyclerView>(R.id.recyclerView)
         val etText = requireView().findViewById<EditText>(R.id.etText)
         val btSend = requireView().findViewById<ImageButton>(R.id.btSend)
@@ -85,6 +86,11 @@ class ChatFragment : Fragment() {
         chatAdapter.chatMessages.add(initialChatMessage)
         chatAdapter.notifyDataSetChanged()
 
+        dotAnim = requireView().findViewById<LinearLayout>(R.id.dot_animation)
+        hideLinearLayout(dotAnim)
+        animateDots()
+
+
         btSend.setOnClickListener {
             val message = etText.text.toString().trim()
 
@@ -107,15 +113,20 @@ class ChatFragment : Fragment() {
                 chatAdapter.notifyDataSetChanged()
 
                 hideLinearLayout(dotAnim)
+                scrollRecyclerViewToBottom(recyclerView)
             }
 
             etText.text.clear()
+            scrollRecyclerViewToBottom(recyclerView)
         }
 
-        dotAnim = requireView().findViewById<LinearLayout>(R.id.dot_animation)
-        hideLinearLayout(dotAnim)
-
-        animateDots()
+        //check etText position
+        etText.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
+            if(oldTop > top){
+                Log.v("SA","22")
+                scrollRecyclerViewToBottom(recyclerView)
+            }
+        }
 
     }
     private fun animateDots(){
@@ -183,6 +194,10 @@ class ChatFragment : Fragment() {
 
     private fun hideLinearLayout(linearLayout: LinearLayout) {
         linearLayout.visibility = View.INVISIBLE
+    }
+
+    private fun scrollRecyclerViewToBottom(recyclerView: RecyclerView) {
+        recyclerView.smoothScrollToPosition(chatAdapter.itemCount - 1)
     }
 
 }
