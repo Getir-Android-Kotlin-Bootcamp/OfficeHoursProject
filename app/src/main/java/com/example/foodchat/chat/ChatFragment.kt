@@ -1,163 +1,161 @@
 package com.example.foodchat.chat
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.ObjectAnimator
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.foodchat.R
 import com.google.ai.client.generativeai.Chat
 import com.google.ai.client.generativeai.GenerativeModel
 import com.google.ai.client.generativeai.type.content
-import com.ns.animationtest.ChatMessage
+import com.example.foodchat.chat.ChatMessage
+import com.example.foodchat.databinding.FragmentChatBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 
 class ChatFragment : Fragment() {
 
+    private lateinit var binding: FragmentChatBinding
+    private lateinit var chatAdapter: ChatAdapter
     private lateinit var chat: Chat
     private lateinit var generativeModel: GenerativeModel
-    private lateinit var chatAdapter: ChatAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = FragmentChatBinding.inflate(layoutInflater)
+
+        // Instantiate gemini model
+        generativeModel = GenerativeModel(
+            modelName = "gemini-pro",
+            apiKey = "AIzaSyAcOvXxgH1_BRVGYVVjpT1gWYFDHGKTNeU"
+        )
 
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false)
-    }
+    ): View {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val recyclerView = requireView().findViewById<RecyclerView>(R.id.recyclerView)
-        val etText = requireView().findViewById<EditText>(R.id.etText)
-        val btSend = requireView().findViewById<Button>(R.id.btSend)
+        setupRecyclerView()
 
-        generativeModel = GenerativeModel(
-            modelName = "gemini-pro",
-            apiKey = "AIzaSyAcOvXxgH1_BRVGYVVjpT1gWYFDHGKTNeU"
-        )
-
-        GlobalScope.launch {
+        CoroutineScope(Dispatchers.Main).launch {
             chat = generativeModel.startChat(
                 history = listOf(
                     content(role = "user") {
-                        text(
-                            " \"You are an ai assistant for food courier application. \" +\n" +
-                                    "                    \"Customers may ask you some questions about foods, couriers, restaurant etc.\" +\n" +
-                                    "                    \"Pretend to an assistant of this application. I will ask you questions as a customer. You can access to everything. \" +\n" +
-                                    "                    \"Don't give me examples. Just say okay I will be an ai assistant and how can I help you?\"\n"
-                        )
+                        text(getString(R.string.gemini_role))
                     },
                     content(role = "model") { text("Hi, how can I help you?") }
                 )
             )
         }
 
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        val chatStart = ChatMessage(
+            message = "How can I help you?",
+            isMessageFromUser = false,
+            isLoading = false
+        )
 
-        // Instantiate ChatAdapter
-        chatAdapter = ChatAdapter()
-        recyclerView.adapter = chatAdapter
+        updateRecyclerAdapter(chatStart)
 
-        btSend.setOnClickListener {
-            val message = etText.text.toString().trim()
+        with(binding) {
 
-            val chatMessage =
-                ChatMessage(message = message, isMessageFromUser = true)
-            chatAdapter.chatMessages.add(chatMessage)
-            chatAdapter.notifyDataSetChanged()
+            ivDeliver.setOnClickListener {
 
-            CoroutineScope(Dispatchers.Main).launch {
-                val response = chat.sendMessage(message).text.toString()
-                Log.d("TAG", "onCreate: $response")
-                chatAdapter.chatMessages.add(
+                val message = etMessage.text.toString().trim()
+
+                if (message.isNotEmpty()) {
+
+                    val chatMessage =
+                        ChatMessage(message = message, isMessageFromUser = true, isLoading = false)
+                    updateRecyclerAdapter(chatMessage)
+
+                    // Clear EditText
+                    binding.etMessage.text?.clear()
+
+                    // Close the keyboard after the message sent
+                    val inputMethodManager =
+                        requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    inputMethodManager.hideSoftInputFromWindow(binding.etMessage.windowToken, 0)
+
+                    val load = chatMessage.copy(isLoading = true)
+                    chatAdapter.chatMessages.add(load)
+
+                    val lastMessageFromSender = chatAdapter.chatMessages.last().message
+
+                    getResponseFromGemini(lastMessageFromSender)
+
+                }
+            }
+        }
+        return binding.root
+
+    }
+
+    private fun getResponseFromGemini(lastMessageFromSender: String?) {
+        CoroutineScope(Dispatchers.Main).launch {
+
+            lastMessageFromSender?.let {
+                val response = async { sendMessage(lastMessageFromSender) }.await()
+
+                val responseChatMessage =
                     ChatMessage(
                         message = response,
-                        isMessageFromUser = false
+                        isMessageFromUser = false,
+                        isLoading = false
                     )
-                )
-                chatAdapter.notifyDataSetChanged()
-            }
-        }
 
-        val imageView = requireView().findViewById<ImageView>(R.id.imageView)
-        val iv2 = requireView().findViewById<ImageView>(R.id.iv2)
-        val iv3 = requireView().findViewById<ImageView>(R.id.iv3)
-        val iv4 = requireView().findViewById<ImageView>(R.id.iv4)
-
-
-        val anim1 = ObjectAnimator.ofFloat(imageView, "translationY", 0f, -5f).apply {
-            duration = 100
-            repeatMode = ObjectAnimator.REVERSE
-            repeatCount = ObjectAnimator.RESTART
-        }
-
-        val anim2 = ObjectAnimator.ofFloat(iv2, "translationY", 0f, -5f).apply {
-            duration = 100
-            repeatMode = ObjectAnimator.REVERSE
-            repeatCount = ObjectAnimator.RESTART
-        }
-
-        val anim3 = ObjectAnimator.ofFloat(iv3, "translationY", 0f, -5f).apply {
-            duration = 100
-            repeatMode = ObjectAnimator.REVERSE
-            repeatCount = ObjectAnimator.RESTART
-        }
-        val anim4 = ObjectAnimator.ofFloat(iv4, "translationY", 0f, -5f).apply {
-            duration = 100
-            repeatMode = ObjectAnimator.REVERSE
-            repeatCount = ObjectAnimator.RESTART
-        }
-
-
-        anim1.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                super.onAnimationEnd(animation)
-                anim2.start()
+                updateRecyclerAdapter(responseChatMessage)
+                removeLoadingItem()
 
             }
-        })
+        }
+    }
 
-        anim2.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                super.onAnimationEnd(animation)
-                anim3.start()
-            }
-        })
+    private fun setupRecyclerView() {
+        binding.apply {
+            rvChat.layoutManager = LinearLayoutManager(requireContext())
+            chatAdapter = ChatAdapter()
+            binding.rvChat.adapter = chatAdapter
+        }
+    }
 
-        anim3.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                super.onAnimationEnd(animation)
-                anim4.start()
-            }
-        })
-        anim4.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                super.onAnimationEnd(animation)
-                anim1.start()
-            }
-        })
+    private suspend fun sendMessage(message: String): String {
+        return chat.sendMessage(message).text.toString()
+    }
 
-        anim1.start()
+    private fun updateRecyclerAdapter(chatMessage: ChatMessage) {
+        chatAdapter.apply {
+            chatMessages.add(chatMessage)
+            notifyDataSetChanged()
+        }
+    }
 
+    private fun removeLoadingItem() {
+        chatAdapter.apply {
+            chatMessages.removeAt(chatAdapter.chatMessages.lastIndex - 1)
+            notifyDataSetChanged()
+        }
+    }
+
+    private fun initClick() {
+        val ivDeliver: ImageView? = view?.findViewById(R.id.ivDeliver)
+        ivDeliver?.setOnClickListener {
+            Log.d("Chat Fragment", "onCreateView: Tıkladı")
+        }
+        val ivAttachment = view?.findViewById<ImageView>(R.id.ivAttachment)
+        ivAttachment?.setOnClickListener {
+            Log.d("Chat Fragment", "onCreateView: Tıkladı")
+        }
     }
 
 

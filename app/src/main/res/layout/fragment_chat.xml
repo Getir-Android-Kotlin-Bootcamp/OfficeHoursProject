@@ -2,77 +2,120 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChatFragment">
+    tools:context="chat.ChatFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/etText"
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/chat_background"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="27dp"
+        android:background="@drawable/location_button"
+        android:scaleType="center"
+        android:src="@drawable/location_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/etText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btSend"
-        app:layout_constraintStart_toStartOf="parent" />
+    <ImageView
+        android:id="@+id/ivNotification"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="33dp"
+        android:background="@drawable/location_search_field"
+        android:scaleType="center"
+        android:src="@drawable/location_notification"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btSend"
+    <TextView
+        android:id="@+id/tvChat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="send"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="9dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/chat"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivBack" />
 
-    <LinearLayout
-        android:layout_width="70dp"
-        android:layout_height="40dp"
-        android:background="@drawable/dot_background"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="36dp"
+        android:src="@drawable/chat_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvChat" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvChat"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="24dp"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/ivIcon" />
 
+
+    <ImageView
+        android:id="@+id/ivAttachment"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/location_search_field"
+        android:scaleType="center"
+        android:src="@drawable/chat_attachment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="259dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/chat_color"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivAttachment">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etType"
+            style="@style/TextInputLayoutStyle"
+            android:layout_width="209dp"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etMessage"
+                style="@style/TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:hint="Food Runs typing...."
+                android:textColorHint="#80000000" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="6dp"
-            android:layout_height="6dp"
-            android:layout_marginHorizontal="2dp"
-            app:srcCompat="@drawable/dot" />
-
-        <ImageView
-            android:id="@+id/iv2"
-            android:layout_width="6dp"
-            android:layout_height="6dp"
-            android:layout_marginHorizontal="2dp"
-            app:srcCompat="@drawable/dot" />
-
-        <ImageView
-            android:id="@+id/iv3"
-            android:layout_width="6dp"
-            android:layout_height="6dp"
-            android:layout_marginHorizontal="2dp"
-            app:srcCompat="@drawable/dot" />
-
-        <ImageView
-            android:id="@+id/iv4"
-            android:layout_width="6dp"
-            android:layout_height="6dp"
-            android:layout_marginHorizontal="2dp"
-            app:srcCompat="@drawable/dot" />
-
+            android:id="@+id/ivDeliver"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center"
+            android:src="@drawable/chat_deliver" />
     </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
