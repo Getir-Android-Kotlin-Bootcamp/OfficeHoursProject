@@ -5,43 +5,122 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChatFragment">
+    tools:context=".ChatFragment"
+    android:background="@drawable/chat_bg">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/etText"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="36dp"
+        android:paddingTop="60dp"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toTopOf="@+id/etText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/chat_title">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/chat_boticon"
+        app:layout_constraintStart_toStartOf="@+id/recyclerView"
+        app:layout_constraintTop_toTopOf="@+id/recyclerView" />
 
     <EditText
         android:id="@+id/etText"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btSend"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btSend"
+        android:layout_height="0dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/button_attach"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_attach"
+        app:layout_constraintTop_toTopOf="@+id/button_attach"
+        android:hint="Food Runs typing....."
+        android:textColorHint="#80000000"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:background="@drawable/edittext_style"
+        />
+    <TextView
+        android:id="@+id/chat_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="send"
+        android:layout_marginTop="9dp"
+        android:text="Chat"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/button_back"
+        app:layout_constraintTop_toBottomOf="@+id/button_back" />
+
+    <ImageButton
+        android:id="@+id/btSend"
+        android:layout_width="34dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/etText"
+        app:layout_constraintEnd_toEndOf="@+id/etText"
+        app:layout_constraintTop_toTopOf="@+id/etText"
+        android:src="@drawable/chat_sendicon"
+
+        android:background="@drawable/edittext_style"/>
+
+    <ImageButton
+        android:id="@+id/button_back"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="33dp"
+        android:background="@drawable/chat_btnbackbackground"
+        app:circularflow_defaultRadius="7dp"
+        android:src="@drawable/chat_backbtn"
+        app:layout_constraintBottom_toBottomOf="@+id/button_noti"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button_noti" />
+
+    <ImageButton
+        android:id="@+id/button_noti"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="33dp"
+        android:background="@drawable/chat_btngeneralbackground"
+        android:src="@drawable/chat_notibtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageButton
+        android:id="@+id/button_attach"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/chat_btngeneralbackground"
+        android:src="@drawable/chat_attachicon"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
+        android:id="@+id/dot_animation"
         android:layout_width="70dp"
         android:layout_height="40dp"
-        android:background="@drawable/dot_background"
+        android:background="@drawable/item_messages_background"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
+        app:layout_constraintStart_toStartOf="@+id/recyclerView"
+        >
 
 
         <ImageView

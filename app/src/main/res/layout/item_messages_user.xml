@@ -10,9 +10,9 @@
         android:id="@+id/layout_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/item_messages_background"
+        android:background="@drawable/item_messages_user_background"
         android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -22,9 +22,10 @@
             android:maxWidth="260dp"
             android:padding="12dp"
             android:text="This is a Message"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="14sp" />
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
