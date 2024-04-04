@@ -103,9 +103,10 @@
         android:hint="Food Runs typing....."
         android:textColorHint="#80000000"
         android:textSize="14sp"
+
         android:textStyle="bold"
         android:padding="16dp"
-        android:background="@drawable/button_style" />
+        android:background="@drawable/et_style" />
     <ImageButton
         android:id="@+id/btSend"
         android:layout_width="wrap_content"
@@ -118,7 +119,7 @@
         app:layout_constraintTop_toTopOf="@+id/etText"
         android:src="@drawable/send_icon"
 
-        android:background="@drawable/button_style"/>
+        android:background="@drawable/et_style"/>
 
 
 
