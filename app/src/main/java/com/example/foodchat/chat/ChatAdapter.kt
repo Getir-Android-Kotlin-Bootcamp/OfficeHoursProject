@@ -26,8 +26,18 @@ class ChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class BotMessagesViewHolder(private val binding: ItemMessagesBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(message: ChatMessage) {
+        fun bind(message: ChatMessage, position: Int) {
             binding.textView.text = message.message
+
+            val isLastItem = position == itemCount - 1
+
+            if (isLastItem) {
+                ObjectAnimator.ofFloat(binding.layoutText, "translationX", -100f, 50f).apply {
+                    duration = 500
+                    interpolator = OvershootInterpolator()
+                    start()
+                }
+            }
         }
     }
 
@@ -136,7 +146,7 @@ class ChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val message = chatMessages[position]
         when (holder) {
             is UserMessagesViewHolder -> holder.bind(message)
-            is BotMessagesViewHolder -> holder.bind(message)
+            is BotMessagesViewHolder -> holder.bind(message, position)
             is LoadingViewHolder -> holder.setLoading(message)
         }
     }
