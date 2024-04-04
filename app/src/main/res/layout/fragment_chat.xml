@@ -79,7 +79,6 @@
         android:src="@drawable/chat_sendicon"
         app:layout_constraintBottom_toBottomOf="@+id/etText"
         app:layout_constraintEnd_toEndOf="@+id/etText"
-
         app:layout_constraintTop_toTopOf="@+id/etText" />
 
     <ImageButton

@@ -4,6 +4,7 @@
     android:id="@+id/linearLayout"
     android:layout_width="70dp"
     android:layout_height="40dp"
+    android:layout_marginTop="24dp"
     android:background="@drawable/dot_background"
     android:gravity="center"
     android:orientation="horizontal">
