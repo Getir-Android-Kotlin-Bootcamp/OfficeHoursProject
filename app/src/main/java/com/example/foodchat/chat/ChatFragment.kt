@@ -6,16 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.foodchat.R
+import com.example.foodchat.databinding.FragmentChatBinding
 import com.google.ai.client.generativeai.Chat
 import com.google.ai.client.generativeai.GenerativeModel
 import com.google.ai.client.generativeai.type.content
-import com.ns.animationtest.ChatMessage
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
@@ -27,10 +24,14 @@ class ChatFragment : Fragment() {
     private lateinit var chat: Chat
     private lateinit var generativeModel: GenerativeModel
     private lateinit var chatAdapter: ChatAdapter
+    private lateinit var binding: FragmentChatBinding
+
     var isRes : MutableLiveData<Boolean> = MutableLiveData()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = FragmentChatBinding.inflate(layoutInflater)
+
 
     }
 
@@ -38,67 +39,96 @@ class ChatFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false)
+        generativeModel = GenerativeModel(
+            modelName = "gemini-pro",
+            apiKey = getString(R.string.api_key)
+        )
+        return binding.root
     }
 
     @SuppressLint("NotifyDataSetChanged", "SuspiciousIndentation")
     @OptIn(DelicateCoroutinesApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val recyclerView = requireView().findViewById<RecyclerView>(R.id.recyclerView)
-        val etText = requireView().findViewById<EditText>(R.id.etText)
-        val btSend = requireView().findViewById<Button>(R.id.btSend)
 
 
 
-        generativeModel = GenerativeModel(
-            modelName = "gemini-pro",
-            apiKey = "AIzaSyAcOvXxgH1_BRVGYVVjpT1gWYFDHGKTNeU"
-        )
+
+        initAi()
+
+
+        initRV()
+
+    with(binding){
+
+
+        btSend.setOnClickListener {
+
+
+            isRes.value = false
+            val message = etText.text.toString().trim()
+            etText.text.clear()
+            val chatMessage = ChatMessage(userInput = message)
+
+            chatAdapter.apply {
+               chatMessages.add(chatMessage)
+               notifyDataSetChanged()
+
+
+                MainScope().launch {
+
+                    val response = chat.sendMessage(message).text.toString()
+
+                    chatMessages.add(
+                        ChatMessage(
+                            message = response,
+                            userInput = message
+                        )
+                    )
+                    isRes.value = true
+
+                        chatMessages.removeAt(chatMessages.lastIndex - 1)
+                        notifyDataSetChanged()
+
+
+
+                }
+            }
+
+        }
+}
+
+
+    }
+
+
+
+    @OptIn(DelicateCoroutinesApi::class)
+    private  fun initAi(){
 
         GlobalScope.launch {
             chat = generativeModel.startChat(
                 history = listOf(
-                    content(role = "user") {
+                    content(role = getString(R.string.user)) {
                         text(
-                            " \"You are an ai assistant for food courier application. \" +\n" +
-                                    "                    \"Customers may ask you some questions about foods, couriers, restaurant etc.\" +\n" +
-                                    "                    \"Pretend to an assistant of this application. I will ask you questions as a customer. You can access to everything. \" +\n" +
-                                    "                    \"Don't give me examples. Just say okay I will be an ai assistant and how can I help you?\"\n"
-                        )
+                            getString(R.string.introduce))
                     },
-                    content(role = "model") { text("Hi, how can I help you?") }
+                    content(role = getString(R.string.model)) { text(getString(R.string.first_data)) }
                 )
             )
         }
-
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        chatAdapter = ChatAdapter(isRes)
-        recyclerView.adapter = chatAdapter
-
-
-
-        btSend.setOnClickListener {
-            isRes.value = false
-            val message = etText.text.toString().trim()
-
-            val chatMessage = ChatMessage(userInput = message)
-            chatAdapter.chatMessages.add(chatMessage)
-            chatAdapter.notifyDataSetChanged()
-
-            MainScope().launch {
-                val response = chat.sendMessage(message).text.toString()
-
-                chatAdapter.chatMessages.add(
-                    ChatMessage(
-                        message = response,
-                    )
-                )
-                isRes.value = true
-                chatAdapter.notifyDataSetChanged()
-            }
-        }
     }
+private fun initRV(){
+    binding.  recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+    chatAdapter = ChatAdapter(isRes)
+    binding. recyclerView.adapter = chatAdapter
+}
+    @SuppressLint("NotifyDataSetChanged")
+    private fun addMessage(chatMessage: ChatMessage){
+        chatAdapter.chatMessages.add(chatMessage)
+        chatAdapter.notifyDataSetChanged()
+    }
+
+
 }

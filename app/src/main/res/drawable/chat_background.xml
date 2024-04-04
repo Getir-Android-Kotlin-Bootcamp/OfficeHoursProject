@@ -9,7 +9,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="257.44"
           android:startY="-17.79"
           android:endX="278.42"
@@ -25,7 +25,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="68"
           android:startY="34.97"
           android:endX="92.59"
@@ -41,7 +41,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="96.01"
           android:startY="32.35"
           android:endX="103.45"
@@ -57,7 +57,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="107.91"
           android:startY="43.08"
           android:endX="113.14"
@@ -73,7 +73,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="90.92"
           android:startY="27.92"
           android:endX="93.54"
@@ -89,7 +89,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="104.53"
           android:startY="34.66"
           android:endX="107.02"
@@ -105,7 +105,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="117.2"
           android:startY="46.89"
           android:endX="119.82"
@@ -121,7 +121,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="84.25"
           android:startY="29.88"
           android:endX="86.87"
@@ -137,7 +137,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="92.84"
           android:startY="19.31"
           android:endX="95.07"
@@ -153,7 +153,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="93.71"
           android:startY="34.93"
           android:endX="97.51"
@@ -169,7 +169,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="313.22"
           android:startY="9.73"
           android:endX="330.18"
@@ -185,7 +185,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="102.56"
           android:startY="38.55"
           android:endX="123.92"
@@ -201,7 +201,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="215.87"
           android:startY="-6.64"
           android:endX="236.32"
@@ -217,7 +217,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="323.74"
           android:startY="145.49"
           android:endX="344.03"
@@ -233,7 +233,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="337.13"
           android:startY="134.53"
           android:endX="339.63"
@@ -249,7 +249,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="329.43"
           android:startY="139.6"
           android:endX="342.02"
@@ -265,7 +265,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="249.17"
           android:startY="99.71"
           android:endX="268.49"
@@ -281,7 +281,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="259.93"
           android:startY="98.25"
           android:endX="264.75"
@@ -297,7 +297,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="269.62"
           android:startY="92.83"
           android:endX="275.24"
@@ -313,7 +313,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="267.76"
           android:startY="82.67"
           android:endX="270.74"
@@ -329,7 +329,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="158.32"
           android:startY="76.63"
           android:endX="183.79"
@@ -345,7 +345,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="191.04"
           android:startY="61.84"
           android:endX="192.35"
@@ -361,7 +361,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="186.19"
           android:startY="62.21"
           android:endX="187.5"
@@ -377,7 +377,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="181.41"
           android:startY="62.6"
           android:endX="182.97"
@@ -393,7 +393,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="175.68"
           android:startY="64.95"
           android:endX="176.99"
@@ -409,7 +409,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="176.73"
           android:startY="59.51"
           android:endX="177.31"
@@ -425,7 +425,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="182.4"
           android:startY="57.14"
           android:endX="183.71"
@@ -441,7 +441,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="189.32"
           android:startY="57.62"
           android:endX="190.88"
@@ -457,7 +457,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="185.05"
           android:startY="53.53"
           android:endX="186.36"
@@ -473,7 +473,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="179.26"
           android:startY="53.5"
           android:endX="180.82"
@@ -489,7 +489,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="174.54"
           android:startY="56.27"
           android:endX="175.85"
@@ -505,7 +505,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="181.32"
           android:startY="48.48"
           android:endX="181.98"
@@ -521,7 +521,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="175.59"
           android:startY="50.83"
           android:endX="176.9"
@@ -537,7 +537,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="179.7"
           android:startY="66.59"
           android:endX="181.01"
@@ -553,7 +553,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="187.44"
           android:startY="65.07"
           android:endX="188.1"
@@ -569,7 +569,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="15.24"
           android:startY="6.34"
           android:endX="36.29"
@@ -585,7 +585,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="141.25"
           android:startY="18"
           android:endX="156.49"
@@ -601,7 +601,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="150.88"
           android:startY="18.42"
           android:endX="155.87"
@@ -617,7 +617,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="151.16"
           android:startY="9.14"
           android:endX="156.14"
@@ -633,7 +633,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="191.04"
           android:startY="52.45"
           android:endX="227.54"
@@ -649,7 +649,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="211.92"
           android:startY="50.44"
           android:endX="218.75"
@@ -665,7 +665,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="221.54"
           android:startY="41.46"
           android:endX="226.81"
@@ -681,7 +681,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="230.14"
           android:startY="32.07"
           android:endX="234.82"
@@ -697,7 +697,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="275.01"
           android:startY="139.63"
           android:endX="294.98"
@@ -713,7 +713,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="287.25"
           android:startY="137.6"
           android:endX="293.55"
@@ -729,7 +729,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="303.56"
           android:startY="127.84"
           android:endX="308.83"
@@ -745,7 +745,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="285.48"
           android:startY="128.66"
           android:endX="292.91"
@@ -761,7 +761,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="294.04"
           android:startY="125.12"
           android:endX="298.14"
@@ -777,7 +777,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="294.12"
           android:startY="131.02"
           android:endX="296.08"
@@ -793,7 +793,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="302.46"
           android:startY="114.48"
           android:endX="333.2"
@@ -809,7 +809,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="317.29"
           android:startY="100.59"
           android:endX="325.33"
@@ -825,7 +825,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="313.69"
           android:startY="93.25"
           android:endX="327.01"
@@ -841,7 +841,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="332.47"
           android:startY="88.03"
           android:endX="336.92"
@@ -857,7 +857,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="336.21"
           android:startY="88.38"
           android:endX="337.42"
@@ -873,7 +873,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="332.96"
           android:startY="90.57"
           android:endX="334.17"
@@ -889,7 +889,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="241.48"
           android:startY="20.28"
           android:endX="262.64"
@@ -905,7 +905,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="260.39"
           android:startY="11.58"
           android:endX="263.32"
@@ -921,7 +921,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="268.58"
           android:startY="20.8"
           android:endX="273.33"
@@ -937,7 +937,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="283.23"
           android:startY="66.7"
           android:endX="306.24"
@@ -953,7 +953,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="290.25"
           android:startY="82.49"
           android:endX="321.57"
@@ -969,7 +969,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="288.99"
           android:startY="39.72"
           android:endX="307.15"
@@ -985,7 +985,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="302.89"
           android:startY="26.62"
           android:endX="307.41"
@@ -1001,7 +1001,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="319.71"
           android:startY="33.51"
           android:endX="322.86"
@@ -1017,7 +1017,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="311.14"
           android:startY="31.17"
           android:endX="314.83"
@@ -1033,7 +1033,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="307.83"
           android:startY="28.65"
           android:endX="309.04"
@@ -1049,7 +1049,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="298.63"
           android:startY="36.62"
           android:endX="304.87"
@@ -1065,7 +1065,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="305.54"
           android:startY="41.8"
           android:endX="307.81"
@@ -1081,7 +1081,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="315.95"
           android:startY="40.19"
           android:endX="317.1"
@@ -1097,7 +1097,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="235.73"
           android:startY="63.7"
           android:endX="256.56"
@@ -1113,7 +1113,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="249.95"
           android:startY="50.74"
           android:endX="255.41"
@@ -1129,7 +1129,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="260.53"
           android:startY="66.81"
           android:endX="266.2"
@@ -1145,7 +1145,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="244.8"
           android:startY="59.19"
           android:endX="253.03"
@@ -1161,7 +1161,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="250.29"
           android:startY="62.62"
           android:endX="253.44"
@@ -1177,7 +1177,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="253.71"
           android:startY="54.62"
           android:endX="255.56"
@@ -1193,7 +1193,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="193.28"
           android:startY="96.8"
           android:endX="223.28"
@@ -1209,7 +1209,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="212.6"
           android:startY="94.14"
           android:endX="217.84"
@@ -1225,7 +1225,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="225.28"
           android:startY="80.55"
           android:endX="230.68"
@@ -1241,7 +1241,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="209.37"
           android:startY="99.86"
           android:endX="212.83"
@@ -1257,7 +1257,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="65.24"
           android:startY="-11.93"
           android:endX="95.24"
@@ -1273,7 +1273,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="322.31"
           android:startY="-15.9"
           android:endX="335.22"
@@ -1289,7 +1289,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="169.17"
           android:startY="-5.79"
           android:endX="210.41"
@@ -1305,7 +1305,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="200.94"
           android:startY="0.17"
           android:endX="202.15"
@@ -1321,7 +1321,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="328.88"
           android:startY="110.03"
           android:endX="360.45"
@@ -1337,7 +1337,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="98.09"
           android:startY="-2.01"
           android:endX="114.96"
@@ -1353,7 +1353,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="222.95"
           android:startY="114.81"
           android:endX="244.53"
@@ -1369,7 +1369,7 @@
       android:strokeAlpha="0.1"
       android:fillAlpha="0.1">
     <aapt:attr name="android:fillColor">
-      <gradient 
+      <gradient
           android:startX="232.66"
           android:startY="108.22"
           android:endX="242.26"

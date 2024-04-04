@@ -14,7 +14,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodchat.R
 import com.example.foodchat.databinding.ItemMessagesBinding
-import com.ns.animationtest.ChatMessage
 
 class ChatAdapter(val isRes: MutableLiveData<Boolean>) :
     RecyclerView.Adapter<ChatAdapter.MessagesViewHolder>() {
@@ -47,11 +46,11 @@ class ChatAdapter(val isRes: MutableLiveData<Boolean>) :
 
         if (isRes.value != null) {
             if (isRes.value == true) {
-                    holder.binding.loadingBar.visibility = View.GONE
-                    holder.binding.textView.visibility = View.VISIBLE
+                holder.binding.loadingBar.visibility = View.GONE
+                holder.binding.textView.visibility = View.VISIBLE
             }
         } else {
-                holder.binding.textView.visibility = View.GONE
+            holder.binding.textView.visibility = View.GONE
         }
 
         // val gravity = if (message.isMessageFromUser == true) Gravity.END else Gravity.START

@@ -1,9 +1,10 @@
-package com.ns.animationtest
+package com.example.foodchat.chat
 
 
 
 data class ChatMessage(
-    var userInput : String? = null,
-    var message: String? = null
+    val userInput : String? = null,
+    val message: String? = null,
+
 )
 
