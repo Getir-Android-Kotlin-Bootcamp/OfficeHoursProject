@@ -1,8 +1,5 @@
 package com.example.foodchat.chat
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -85,8 +81,6 @@ class ChatFragment : Fragment() {
 
         dotAnim = requireView().findViewById<LinearLayout>(R.id.dot_animation)
         hideLinearLayout(dotAnim)
-        animateDots()
-
 
         btSend.setOnClickListener {
             val message = etText.text.toString().trim()
@@ -153,70 +147,6 @@ class ChatFragment : Fragment() {
             chatMessages.removeAt(chatAdapter.chatMessages.lastIndex - 1)
             notifyDataSetChanged()
         }
-    }
-
-    private fun animateDots() {
-        val imageView = requireView().findViewById<ImageView>(R.id.imageView)
-        val iv2 = requireView().findViewById<ImageView>(R.id.iv2)
-        val iv3 = requireView().findViewById<ImageView>(R.id.iv3)
-        val iv4 = requireView().findViewById<ImageView>(R.id.iv4)
-
-
-        val anim1 = ObjectAnimator.ofFloat(imageView, "translationY", 0f, -5f).apply {
-            duration = 100
-            repeatMode = ObjectAnimator.REVERSE
-            repeatCount = ObjectAnimator.RESTART
-        }
-
-        val anim2 = ObjectAnimator.ofFloat(iv2, "translationY", 0f, -5f).apply {
-            duration = 100
-            repeatMode = ObjectAnimator.REVERSE
-            repeatCount = ObjectAnimator.RESTART
-        }
-
-        val anim3 = ObjectAnimator.ofFloat(iv3, "translationY", 0f, -5f).apply {
-            duration = 100
-            repeatMode = ObjectAnimator.REVERSE
-            repeatCount = ObjectAnimator.RESTART
-        }
-        val anim4 = ObjectAnimator.ofFloat(iv4, "translationY", 0f, -5f).apply {
-            duration = 100
-            repeatMode = ObjectAnimator.REVERSE
-            repeatCount = ObjectAnimator.RESTART
-        }
-        anim1.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                super.onAnimationEnd(animation)
-                anim2.start()
-
-            }
-        })
-
-        anim2.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                super.onAnimationEnd(animation)
-                anim3.start()
-            }
-        })
-
-        anim3.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                super.onAnimationEnd(animation)
-                anim4.start()
-            }
-        })
-        anim4.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator) {
-                super.onAnimationEnd(animation)
-                anim1.start()
-            }
-        })
-
-        anim1.start()
-    }
-
-    private fun showLinearLayout(linearLayout: LinearLayout) {
-        linearLayout.visibility = View.VISIBLE
     }
 
     private fun hideLinearLayout(linearLayout: LinearLayout) {
