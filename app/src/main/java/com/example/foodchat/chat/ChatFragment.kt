@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -57,6 +59,7 @@ class ChatFragment : Fragment() {
         addMessage(initialChatMessage)
 
         with(binding) {
+            resizeWindow()
             btSend.setOnClickListener {
                 val message = etText.text.toString().trim()
 
@@ -95,6 +98,15 @@ class ChatFragment : Fragment() {
                 }
             }
         }
+    }
+
+    //klavye açıldığında ekran boyutunu arttırıp okunurluğu arttırır.
+    private  fun resizeWindow(){
+      binding.  etText.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                activity?. window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+            }
+        })
     }
 
     @OptIn(DelicateCoroutinesApi::class)
