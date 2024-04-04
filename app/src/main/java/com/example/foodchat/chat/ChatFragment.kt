@@ -77,8 +77,6 @@ class ChatFragment : Fragment() {
         val initialChatMessage = ChatMessage(message = initialMessage, isMessageFromUser = false)
         addMsgToAdapter(initialChatMessage)
 
-        dotAnim = requireView().findViewById(R.id.dot_animation)
-        hideLinearLayout(dotAnim)
 
         btSend.setOnClickListener {
             val message = etText.text.toString().trim()
@@ -148,10 +146,6 @@ private fun addMsgToAdapter(chatMessage: ChatMessage){
             chatMessages.removeAt(chatAdapter.chatMessages.lastIndex - 1)
             notifyDataSetChanged()
         }
-    }
-
-    private fun hideLinearLayout(linearLayout: LinearLayout) {
-        linearLayout.visibility = View.INVISIBLE
     }
 
     private fun scrollRecyclerViewToBottom(recyclerView: RecyclerView) {
