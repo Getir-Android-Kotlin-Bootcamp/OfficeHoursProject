@@ -1,23 +1,25 @@
 package com.example.foodchat.chat
 
+import android.annotation.SuppressLint
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.LinearLayout
+import android.view.ViewTreeObserver
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodchat.R
+import com.example.foodchat.databinding.FragmentChatBinding
 import com.google.ai.client.generativeai.Chat
 import com.google.ai.client.generativeai.GenerativeModel
 import com.google.ai.client.generativeai.type.content
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
@@ -27,96 +29,114 @@ class ChatFragment : Fragment() {
     private lateinit var chat: Chat
     private lateinit var generativeModel: GenerativeModel
     private lateinit var chatAdapter: ChatAdapter
-    private lateinit var dotAnim: LinearLayout
+    private lateinit var binding: FragmentChatBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = FragmentChatBinding.inflate(layoutInflater)
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_chat, container, false)
+    ): View {
+        generativeModel = GenerativeModel(
+            modelName = getString(R.string.model_name),
+            apiKey = getString(R.string.api_key)
+        )
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView = requireView().findViewById<RecyclerView>(R.id.recyclerView)
-        val etText = requireView().findViewById<EditText>(R.id.etText)
-        val btSend = requireView().findViewById<ImageButton>(R.id.btSend)
+        initAi()
+        initRV()
 
-        generativeModel = GenerativeModel(
-            modelName = "gemini-pro",
-            apiKey = "AIzaSyAcOvXxgH1_BRVGYVVjpT1gWYFDHGKTNeU"
-        )
+        val initialMessage = getString(R.string.hi_message)
+        val initialChatMessage = ChatMessage(message = initialMessage, isMessageFromUser = false)
+        addMessage(initialChatMessage)
 
-        GlobalScope.launch {
+        with(binding) {
+            resizeWindow()
+            btSend.setOnClickListener {
+                val message = etText.text.toString().trim()
+
+
+                val chatMessage =
+                    ChatMessage(message = message, isMessageFromUser = true, isLoading = false)
+                addMessage(chatMessage)
+
+
+                val load = chatMessage.copy(isLoading = true)
+                addMessage(load)
+                CoroutineScope(Dispatchers.Main).launch {
+
+                    val lastMessageFromSender = chatAdapter.chatMessages.last().message
+
+                    getResponseFromGemini(lastMessageFromSender)
+
+
+                    scrollRecyclerViewToBottom(recyclerView)
+                }
+
+                etText.text.clear()
+                // klavyeyi indiriyor
+                val inputMethodManager =
+                    requireContext().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(binding.etText.windowToken, 0)
+
+                scrollRecyclerViewToBottom(recyclerView)
+            }
+
+
+            // check etText position
+            etText.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
+                if (oldTop > top) {
+                    scrollRecyclerViewToBottom(recyclerView)
+                }
+            }
+        }
+    }
+
+    //klavye açıldığında ekran boyutunu arttırıp okunurluğu arttırır.
+    private  fun resizeWindow(){
+      binding.  etText.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                activity?. window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+            }
+        })
+    }
+
+    @OptIn(DelicateCoroutinesApi::class)
+    private fun initAi() {
+        CoroutineScope(Dispatchers.Main).launch {
             chat = generativeModel.startChat(
                 history = listOf(
-                    content(role = "user") {
+                    content(role = getString(R.string.user)) {
                         text(
-                            " \"You are an ai assistant for food courier application. \" +\n" +
-                                    "                    \"Customers may ask you some questions about foods, couriers, restaurant etc.\" +\n" +
-                                    "                    \"Pretend to an assistant of this application. I will ask you questions as a customer. You can access to everything. \" +\n" +
-                                    "                    \"Don't give me examples. Just say okay I will be an ai assistant and how can I help you?\"\n"
+                            getString(R.string.introduce)
                         )
                     },
-                    content(role = "model") { text("Hi, how can I help you?") }
+                    content(role = getString(R.string.model)) { text(getString(R.string.first_data)) }
                 )
             )
         }
 
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+    }
 
-        // Instantiate ChatAdapter
+    private fun initRV() {
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
         chatAdapter = ChatAdapter()
-        recyclerView.adapter = chatAdapter
+        binding.recyclerView.adapter = chatAdapter
+    }
 
-        val initialMessage = "Hi, how can I help you?"
-        val initialChatMessage = ChatMessage(message = initialMessage, isMessageFromUser = false)
-        chatAdapter.chatMessages.add(initialChatMessage)
+    @SuppressLint("NotifyDataSetChanged")
+    private fun addMessage(chatMessage: ChatMessage) {
+        chatAdapter.chatMessages.add(chatMessage)
         chatAdapter.notifyDataSetChanged()
-
-        dotAnim = requireView().findViewById<LinearLayout>(R.id.dot_animation)
-        hideLinearLayout(dotAnim)
-
-        btSend.setOnClickListener {
-            val message = etText.text.toString().trim()
-
-
-            val chatMessage =
-                ChatMessage(message = message, isMessageFromUser = true, isLoading = false)
-            chatAdapter.chatMessages.add(chatMessage)
-            chatAdapter.notifyDataSetChanged()
-
-
-            val load = chatMessage.copy(isLoading = true)
-            chatAdapter.chatMessages.add(load)
-            CoroutineScope(Dispatchers.Main).launch {
-
-                val lastMessageFromSender = chatAdapter.chatMessages.last().message
-
-                getResponseFromGemini(lastMessageFromSender)
-
-
-                scrollRecyclerViewToBottom(recyclerView)
-            }
-
-            etText.text.clear()
-            scrollRecyclerViewToBottom(recyclerView)
-        }
-
-
-        //check etText position
-        etText.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
-            if (oldTop > top) {
-                Log.v("SA", "22")
-                scrollRecyclerViewToBottom(recyclerView)
-            }
-        }
-
     }
 
     private fun getResponseFromGemini(lastMessageFromSender: String?) {
@@ -132,25 +152,21 @@ class ChatFragment : Fragment() {
                         isMessageFromUser = false,
                         isLoading = false
                     )
-                chatAdapter.chatMessages.add(responseChatMessage)
-                chatAdapter.notifyDataSetChanged()
+                addMessage(responseChatMessage)
 
-//                updateRecyclerAdapter(responseChatMessage)
                 removeLoadingItem()
 
+                scrollRecyclerViewToBottom(binding.recyclerView)
             }
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun removeLoadingItem() {
         chatAdapter.apply {
             chatMessages.removeAt(chatAdapter.chatMessages.lastIndex - 1)
             notifyDataSetChanged()
         }
-    }
-
-    private fun hideLinearLayout(linearLayout: LinearLayout) {
-        linearLayout.visibility = View.INVISIBLE
     }
 
     private fun scrollRecyclerViewToBottom(recyclerView: RecyclerView) {
