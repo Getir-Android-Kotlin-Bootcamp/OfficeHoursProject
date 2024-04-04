@@ -9,4 +9,6 @@
     <string name="user_role">user</string>
     <string name="model_role">model</string>
     <string name="hi_text">Hi, how can I help you?</string>
+    <string name="api_key">AIzaSyAcOvXxgH1_BRVGYVVjpT1gWYFDHGKTNeU</string>
+    <string name="model_name">gemini-pro</string>
 </resources>

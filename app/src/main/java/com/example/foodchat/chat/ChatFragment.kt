@@ -49,8 +49,8 @@ class ChatFragment : Fragment() {
         val btSend = requireView().findViewById<ImageButton>(R.id.btSend)
 
         generativeModel = GenerativeModel(
-            modelName = "gemini-pro",
-            apiKey = "AIzaSyAcOvXxgH1_BRVGYVVjpT1gWYFDHGKTNeU"
+            modelName = getString(R.string.model_name),
+            apiKey = getString(R.string.api_key)
         )
 
         GlobalScope.launch {
