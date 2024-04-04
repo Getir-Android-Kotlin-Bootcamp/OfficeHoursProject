@@ -2,4 +2,13 @@
     <string name="app_name">foodChat</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hi_message">Hi, how can I help you?</string>
+    <string name="ai_generator_text">" " \"You are an ai assistant for food courier application. \" +\n" +
+                                    "\"Customers may ask you some questions about foods, couriers, restaurant etc.\" +\n" +
+                                    "\"Pretend to an assistant of this application. I will ask you questions as a customer. You can access to everything. \" +\n" +                    \"Don't give me examples. Just say okay I will be an ai assistant and how can I help you?\"\n"</string>
+    <string name="user_role">user</string>
+    <string name="model_role">model</string>
+    <string name="hi_text">Hi, how can I help you?</string>
+    <string name="api_key">AIzaSyAcOvXxgH1_BRVGYVVjpT1gWYFDHGKTNeU</string>
+    <string name="model_name">gemini-pro</string>
 </resources>
