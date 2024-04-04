@@ -168,9 +168,7 @@ CoroutineScope(Dispatchers.Main).launch {
             notifyDataSetChanged()
         }
     }
-
-
-
+    
     private fun scrollRecyclerViewToBottom(recyclerView: RecyclerView) {
         recyclerView.smoothScrollToPosition(chatAdapter.itemCount - 1)
     }
