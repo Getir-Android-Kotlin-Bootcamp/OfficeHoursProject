@@ -3,29 +3,26 @@ package com.example.foodchat.chat
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
-import android.content.Context
 import android.os.Bundle
-import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foodchat.R
 import com.google.ai.client.generativeai.Chat
 import com.google.ai.client.generativeai.GenerativeModel
 import com.google.ai.client.generativeai.type.content
-import com.ns.animationtest.ChatMessage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 
@@ -94,25 +91,22 @@ class ChatFragment : Fragment() {
         btSend.setOnClickListener {
             val message = etText.text.toString().trim()
 
-            showLinearLayout(dotAnim)
 
             val chatMessage =
-                ChatMessage(message = message, isMessageFromUser = true)
+                ChatMessage(message = message, isMessageFromUser = true, isLoading = false)
             chatAdapter.chatMessages.add(chatMessage)
             chatAdapter.notifyDataSetChanged()
 
-            CoroutineScope(Dispatchers.Main).launch {
-                val response = chat.sendMessage(message).text.toString()
-                Log.d("TAG", "onCreate: $response")
-                chatAdapter.chatMessages.add(
-                    ChatMessage(
-                        message = response,
-                        isMessageFromUser = false
-                    )
-                )
-                chatAdapter.notifyDataSetChanged()
 
-                hideLinearLayout(dotAnim)
+            val load = chatMessage.copy(isLoading = true)
+            chatAdapter.chatMessages.add(load)
+            CoroutineScope(Dispatchers.Main).launch {
+
+                val lastMessageFromSender = chatAdapter.chatMessages.last().message
+
+                getResponseFromGemini(lastMessageFromSender)
+
+
                 scrollRecyclerViewToBottom(recyclerView)
             }
 
@@ -120,16 +114,48 @@ class ChatFragment : Fragment() {
             scrollRecyclerViewToBottom(recyclerView)
         }
 
+
         //check etText position
         etText.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
-            if(oldTop > top){
-                Log.v("SA","22")
+            if (oldTop > top) {
+                Log.v("SA", "22")
                 scrollRecyclerViewToBottom(recyclerView)
             }
         }
 
     }
-    private fun animateDots(){
+
+    private fun getResponseFromGemini(lastMessageFromSender: String?) {
+        CoroutineScope(Dispatchers.Main).launch {
+
+            lastMessageFromSender?.let {
+                val response =
+                    async { chat.sendMessage(lastMessageFromSender).text.toString() }.await()
+
+                val responseChatMessage =
+                    ChatMessage(
+                        message = response,
+                        isMessageFromUser = false,
+                        isLoading = false
+                    )
+                chatAdapter.chatMessages.add(responseChatMessage)
+                chatAdapter.notifyDataSetChanged()
+
+//                updateRecyclerAdapter(responseChatMessage)
+                removeLoadingItem()
+
+            }
+        }
+    }
+
+    private fun removeLoadingItem() {
+        chatAdapter.apply {
+            chatMessages.removeAt(chatAdapter.chatMessages.lastIndex - 1)
+            notifyDataSetChanged()
+        }
+    }
+
+    private fun animateDots() {
         val imageView = requireView().findViewById<ImageView>(R.id.imageView)
         val iv2 = requireView().findViewById<ImageView>(R.id.iv2)
         val iv3 = requireView().findViewById<ImageView>(R.id.iv3)
@@ -188,6 +214,7 @@ class ChatFragment : Fragment() {
 
         anim1.start()
     }
+
     private fun showLinearLayout(linearLayout: LinearLayout) {
         linearLayout.visibility = View.VISIBLE
     }
