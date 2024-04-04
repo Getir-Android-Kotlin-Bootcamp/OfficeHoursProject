@@ -3,14 +3,10 @@ package com.example.foodchat.chat
 import android.annotation.SuppressLint
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +18,6 @@ import com.google.ai.client.generativeai.type.content
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
@@ -32,9 +27,7 @@ class ChatFragment : Fragment() {
     private lateinit var chat: Chat
     private lateinit var generativeModel: GenerativeModel
     private lateinit var chatAdapter: ChatAdapter
-    private lateinit var dotAnim: LinearLayout
     private lateinit var binding: FragmentChatBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,12 +52,9 @@ class ChatFragment : Fragment() {
         initAi()
         initRV()
 
-
         val initialMessage = getString(R.string.hi_message)
         val initialChatMessage = ChatMessage(message = initialMessage, isMessageFromUser = false)
-       addMessage(initialChatMessage)
-
-
+        addMessage(initialChatMessage)
 
         with(binding) {
             btSend.setOnClickListener {
@@ -89,7 +79,7 @@ class ChatFragment : Fragment() {
                 }
 
                 etText.text.clear()
-               //klavyeyi indiriyor
+                // klavyeyi indiriyor
                 val inputMethodManager =
                     requireContext().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(binding.etText.windowToken, 0)
@@ -98,31 +88,29 @@ class ChatFragment : Fragment() {
             }
 
 
-            //check etText position
+            // check etText position
             etText.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
                 if (oldTop > top) {
                     scrollRecyclerViewToBottom(recyclerView)
                 }
             }
         }
-
-
     }
 
     @OptIn(DelicateCoroutinesApi::class)
     private fun initAi() {
-CoroutineScope(Dispatchers.Main).launch {
-    chat = generativeModel.startChat(
-        history = listOf(
-            content(role = getString(R.string.user)) {
-                text(
-                    getString(R.string.introduce)
+        CoroutineScope(Dispatchers.Main).launch {
+            chat = generativeModel.startChat(
+                history = listOf(
+                    content(role = getString(R.string.user)) {
+                        text(
+                            getString(R.string.introduce)
+                        )
+                    },
+                    content(role = getString(R.string.model)) { text(getString(R.string.first_data)) }
                 )
-            },
-            content(role = getString(R.string.model)) { text(getString(R.string.first_data)) }
-        )
-    )
-}
+            )
+        }
 
     }
 
@@ -154,9 +142,9 @@ CoroutineScope(Dispatchers.Main).launch {
                     )
                 addMessage(responseChatMessage)
 
-//                updateRecyclerAdapter(responseChatMessage)
                 removeLoadingItem()
 
+                scrollRecyclerViewToBottom(binding.recyclerView)
             }
         }
     }
@@ -168,7 +156,7 @@ CoroutineScope(Dispatchers.Main).launch {
             notifyDataSetChanged()
         }
     }
-    
+
     private fun scrollRecyclerViewToBottom(recyclerView: RecyclerView) {
         recyclerView.smoothScrollToPosition(chatAdapter.itemCount - 1)
     }
