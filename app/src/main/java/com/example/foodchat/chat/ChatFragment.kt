@@ -1,6 +1,5 @@
 package com.example.foodchat.chat
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -49,20 +48,22 @@ class ChatFragment : Fragment() {
         val btSend = requireView().findViewById<ImageButton>(R.id.btSend)
 
         generativeModel = GenerativeModel(
-            modelName = getString(R.string.model_name),
-            apiKey = getString(R.string.api_key)
+            modelName = "gemini-pro",
+            apiKey = "AIzaSyAcOvXxgH1_BRVGYVVjpT1gWYFDHGKTNeU"
         )
 
         GlobalScope.launch {
             chat = generativeModel.startChat(
                 history = listOf(
-                    content(role = getString(R.string.user_role)) {
+                    content(role = "user") {
                         text(
-
-                                    getString(R.string.ai_generator_text)
+                            " \"You are an ai assistant for food courier application. \" +\n" +
+                                    "                    \"Customers may ask you some questions about foods, couriers, restaurant etc.\" +\n" +
+                                    "                    \"Pretend to an assistant of this application. I will ask you questions as a customer. You can access to everything. \" +\n" +
+                                    "                    \"Don't give me examples. Just say okay I will be an ai assistant and how can I help you?\"\n"
                         )
                     },
-                    content(role = getString(R.string.model_role)) { text(getString(R.string.hi_text)) }
+                    content(role = "model") { text("Hi, how can I help you?") }
                 )
             )
         }
@@ -73,11 +74,12 @@ class ChatFragment : Fragment() {
         chatAdapter = ChatAdapter()
         recyclerView.adapter = chatAdapter
 
-        val initialMessage = getString(R.string.hi_message)
+        val initialMessage = "Hi, how can I help you?"
         val initialChatMessage = ChatMessage(message = initialMessage, isMessageFromUser = false)
-        addMsgToAdapter(initialChatMessage)
+        chatAdapter.chatMessages.add(initialChatMessage)
+        chatAdapter.notifyDataSetChanged()
 
-        dotAnim = requireView().findViewById(R.id.dot_animation)
+        dotAnim = requireView().findViewById<LinearLayout>(R.id.dot_animation)
         hideLinearLayout(dotAnim)
 
         btSend.setOnClickListener {
@@ -86,11 +88,12 @@ class ChatFragment : Fragment() {
 
             val chatMessage =
                 ChatMessage(message = message, isMessageFromUser = true, isLoading = false)
-            addMsgToAdapter(chatMessage)
+            chatAdapter.chatMessages.add(chatMessage)
+            chatAdapter.notifyDataSetChanged()
 
 
             val load = chatMessage.copy(isLoading = true)
-            addMsgToAdapter(load)
+            chatAdapter.chatMessages.add(load)
             CoroutineScope(Dispatchers.Main).launch {
 
                 val lastMessageFromSender = chatAdapter.chatMessages.last().message
@@ -115,11 +118,7 @@ class ChatFragment : Fragment() {
         }
 
     }
-@SuppressLint("NotifyDataSetChanged")
-private fun addMsgToAdapter(chatMessage: ChatMessage){
-    chatAdapter.chatMessages.add(chatMessage)
-    chatAdapter.notifyDataSetChanged()
-}
+
     private fun getResponseFromGemini(lastMessageFromSender: String?) {
         CoroutineScope(Dispatchers.Main).launch {
 
@@ -133,7 +132,8 @@ private fun addMsgToAdapter(chatMessage: ChatMessage){
                         isMessageFromUser = false,
                         isLoading = false
                     )
-                addMsgToAdapter(responseChatMessage)
+                chatAdapter.chatMessages.add(responseChatMessage)
+                chatAdapter.notifyDataSetChanged()
 
 //                updateRecyclerAdapter(responseChatMessage)
                 removeLoadingItem()
@@ -142,7 +142,6 @@ private fun addMsgToAdapter(chatMessage: ChatMessage){
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun removeLoadingItem() {
         chatAdapter.apply {
             chatMessages.removeAt(chatAdapter.chatMessages.lastIndex - 1)

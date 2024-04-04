@@ -8,7 +8,6 @@
                                     "\"Pretend to an assistant of this application. I will ask you questions as a customer. You can access to everything. \" +\n" +                    \"Don't give me examples. Just say okay I will be an ai assistant and how can I help you?\"\n"</string>
     <string name="user_role">user</string>
     <string name="model_role">model</string>
-    <string name="hi_text">Hi, how can I help you?</string>
     <string name="api_key">AIzaSyAcOvXxgH1_BRVGYVVjpT1gWYFDHGKTNeU</string>
     <string name="model_name">gemini-pro</string>
 </resources>
