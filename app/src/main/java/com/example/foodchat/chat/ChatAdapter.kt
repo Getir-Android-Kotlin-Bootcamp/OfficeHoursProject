@@ -3,6 +3,7 @@ package com.example.foodchat.chat
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +28,15 @@ class ChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class BotMessagesViewHolder(private val binding: ItemMessagesBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(message: ChatMessage, position: Int) {
-            binding.textView.text = message.message
+
+
+            val pattern = Regex("\\*\\*(.*?)\\*\\*")
+
+            val outputString = message.message?.replace(pattern) {
+                "<b>${it.groupValues[1]}</b>"
+            }
+            binding.textView.text = Html.fromHtml(outputString, Html.FROM_HTML_MODE_LEGACY)
+//            binding.textView.text = message.message
 
             val isLastItem = position == itemCount - 1
 
@@ -38,6 +47,7 @@ class ChatAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     start()
                 }
             }
+
         }
     }
 
