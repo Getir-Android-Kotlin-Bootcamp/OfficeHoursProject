@@ -11,7 +11,7 @@ Before starting, you need to add a `local.properties` file to your project and d
 
 1. Create a `local.properties` file in the root directory of your project 
 2. Open the `local.properties` file
-3. Add the following line to specify the path to your Android SDK, replacing `C\:\\Users\\user1\\AppData\\Local\\Android\\Sdk` with the actual path on your system
+3. Add the following line to specify the path to your Android SDK, replacing `sdk.dir=C\:\\Users\\user1\\AppData\\Local\\Android\\Sdk` with the actual path on your system
 
 ## Demo
 
