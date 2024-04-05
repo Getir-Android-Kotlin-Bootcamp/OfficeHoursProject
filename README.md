@@ -4,6 +4,11 @@ Food Chat provides a chat interface integrated with the Google Gemini API to int
 
 ![1](https://github.com/Getir-Android-Kotlin-Bootcamp/OfficeHoursProject-group5/assets/24704582/eb77abcf-de39-4367-9443-ee2d0deed110)
 
+## Requirements
+This project requires one of the following Android Studio versions:
+- Android Studio Iguana (version 2023.2.1)
+- Android Studio Hedgehog (version 2023.1.1 Patch 2)
+
 
 ## Getting Started
 
